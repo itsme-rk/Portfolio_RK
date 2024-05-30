@@ -305,24 +305,36 @@ $(function() {
     // --------------------------------------------- //
     // Contact Form Start
     // --------------------------------------------- //
-    $("#contact-form").submit(function() { //Change
-          var th = $(this);
-          $.ajax({
-              type: "POST",
-              url: "mail.php", //Change
-              data: th.serialize()
-          }).done(function() {
-        $('.contact').find('.form').addClass('is-hidden');
-        $('.contact').find('.form__reply').addClass('is-visible');
-              setTimeout(function() {
-                  // Done Functions
-          $('.contact').find('.form__reply').removeClass('is-visible');
-          $('.contact').find('.form').delay(300).removeClass('is-hidden');
-                  th.trigger("reset");
-              }, 5000);
-          });
-          return false;
+   
+
+    $(document).ready(function() {
+      $("#contact-form").submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+    
+        var th = $(this);
+        $.ajax({
+          type: th.attr('method'),
+          url: th.attr('action'),
+          data: th.serialize(),
+          dataType: "json" // Ensure JSON response
+        }).done(function() {
+          $('.contact').find('.form').addClass('is-hidden');
+          $('.contact').find('.form__reply').addClass('is-visible');
+          setTimeout(function() {
+            $('.contact').find('.form__reply').removeClass('is-visible');
+            $('.contact').find('.form').delay(300).removeClass('is-hidden');
+            th.trigger("reset");
+          }, 5000);
+        }).fail(function() {
+          alert('Failed to send the message. Please try again.');
+        });
       });
+    });
+    
+
+
+ 
+  
     // --------------------------------------------- //
     // Contact Form End
     // --------------------------------------------- //
@@ -434,3 +446,21 @@ $(function() {
   
   
   
+  document.addEventListener("DOMContentLoaded", function() {
+    const roles = ["Data Scientist", "AIML Enthusiast", "Web Developer"];
+    let currentRoleIndex = 0;
+    const roleElement = document.getElementById("animated-role");
+
+    function updateRole() {
+        roleElement.classList.remove("typing-effect"); // Reset animation
+        void roleElement.offsetWidth; // Trigger reflow
+        roleElement.classList.add("typing-effect"); // Reapply animation
+
+        roleElement.textContent = roles[currentRoleIndex];
+        currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+    }
+
+    updateRole(); // Initialize the first text
+    setInterval(updateRole, 3000); // Change text every 3 seconds
+});
+
