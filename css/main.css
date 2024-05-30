@@ -978,6 +978,9 @@ p.additional-text a {
   font: normal 400 1.5rem/1 var(--_font-default);
   font-variant-numeric: lining-nums;
 }
+ .rounded-tag:hover {
+      background-color: #0056b3;
+    }
 .rounded-tag.tag-base {
   background-color: var(--base);
   color: var(--t-bright);

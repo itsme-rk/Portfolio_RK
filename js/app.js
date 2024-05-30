@@ -419,9 +419,9 @@ $(function() {
   function loadTheme(theme){
     const root = document.querySelector(':root');
     if(theme === "light"){
-      themeBtn.innerHTML = `<em></em><i class="ph-bold ph-moon-stars"></i>`;
+      themeBtn.innerHTML = `<em></em><i class="fa-solid fa-moon"></i>`;
     } else {
-      themeBtn.innerHTML = `<em></em><i class="ph-bold ph-sun"></i>`;
+      themeBtn.innerHTML = `<em></em><i class="fa-solid fa-sun"></i>`;
     }
     root.setAttribute('color-scheme', `${theme}`);
   };
